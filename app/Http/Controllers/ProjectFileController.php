@@ -32,7 +32,16 @@ class ProjectFileController extends Controller
 
     public function store( Request $request, $id ) {
 
+
         $file = $request->file('file');
+
+        if ( $file == null ){
+            return [
+                'error' => true,
+                'message' => 'Nao foi selecionado Arquivo'
+            ];
+        }
+
         $original_name = $file->getClientOriginalName();
         $original_extension = $file->getClientOriginalExtension();
         $date_upload = Carbon::now();
