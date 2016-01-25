@@ -5,6 +5,7 @@ namespace CodeProject\Exceptions;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -46,6 +47,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof NotFoundHttpException)
+        {
+            return Response::make(['error'=>'true','error_message'=>'URL não Encontrada'], 404);
+        }
         return parent::render($request, $e);
     }
+
+
+
+
+
+
+
 }
