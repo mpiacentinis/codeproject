@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel</title>
-    @if ( Config::get('app.debug'))
+    @if(Config::get('app.debug'))
         <link href="{{ asset('build/css/vendor/bootstrap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('build/css/vendor/bootstrap-theme.min.css') }}" rel="stylesheet"/>
     @else
@@ -64,7 +64,7 @@
 
 </div>
 
-@if ( Config::get('app.debug'))
+@if(Config::get('app.debug'))
     <script src=" {{ asset('build/js/vendor/jquery.min.js') }}"></script>
     <script src=" {{ asset('build/js/vendor/angular.min.js') }}"></script>
     <script src=" {{ asset('build/js/vendor/angular-route.min.js') }}"></script>
@@ -77,9 +77,9 @@
     <script src=" {{ asset('build/js/vendor/query-string.js') }}"></script>
     <script src=" {{ asset('build/js/vendor/angular-oauth2.min.js') }}"></script>
 
-{{--    <script src=" {{ asset('build/js/app.js') }}"></script>
+    <script src=" {{ asset('build/js/app.js') }}"></script>
     <script src=" {{ asset('build/js/controllers/login.js') }}"></script>
-    <script src=" {{ asset('build/js/controllers/home.js') }}"></script>--}}
+    <script src=" {{ asset('build/js/controllers/home.js') }}"></script>
 @else
     <script src=" {{ elixir('js/all.js') }}"></script>
 @endif

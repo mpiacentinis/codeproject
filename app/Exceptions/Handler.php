@@ -5,6 +5,7 @@ namespace CodeProject\Exceptions;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Validation\ValidationException;
@@ -45,19 +46,46 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $e
+     * @return \Illuminate\Http\Response
+     */
     public function render($request, Exception $e)
     {
-        if ($e instanceof NotFoundHttpException)
-        {
-            return Response::make(['error'=>'true','error_message'=>'URL não Encontrada'], 404);
+        /**
+         * Output error response depending on the exception fired
+         */
+        $className = get_class($e);
+        switch (true) {
+            case (strpos($className,'League\OAuth2\Server\Exception') !== false):
+                // Return JSON response
+                return $this->JSONHandler($e);
+            case (strpos($className,'LucaDegasperi\OAuth2Server\Exceptions') !== false):
+                // Return JSON response
+                return $this->JSONHandler($e);
+            default:
+                // Any other response
+                return parent::render($request, $e);
+                break;
         }
-        return parent::render($request, $e);
+
     }
-
-
-
-
-
+    /**
+     * Return exception as JSON response with status code.
+     *
+     * @param  \Exception  $e
+     * @return mixed
+     */
+    private function JSONHandler(Exception $e) {
+        $data = [
+            'error' => $e->errorType,
+            'error_description' => $e->getMessage(),
+        ];
+        return new JsonResponse($data, $e->httpStatusCode, $e->getHttpHeaders());
+    }
 
 
 }
