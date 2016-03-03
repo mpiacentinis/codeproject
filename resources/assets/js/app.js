@@ -12,11 +12,22 @@ app.config( ['$routeProvider','OAuthProvider', function( $routeProvider,OAuthPro
             controller: 'HomeController'})
     OAuthProvider.configure({
         baseUrl: 'http://localhost:8000',
-        clientId: 'codeproject',
+        clientId: 'projectAPP',
         clientSecret: 'secret',
         grantPath: 'oauth/access_token'
     });
 }]);
+
+/* Credenciais Cadastradas no OAuthClientTableSeeder
+'id' => 'codeproject',
+    'secret' => 'secret',
+    'name' => 'projectAPP',
+    **************************************
+    * Anterior
+    clientId: 'codeproject',
+    clientSecret: 'secret',
+    grantPath: 'oauth/access_token'
+*/
 
 app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) {
     $rootScope.$on('oauth:error', function(event, rejection) {
