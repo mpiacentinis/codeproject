@@ -54,6 +54,7 @@ Route::group(['middleware' => 'oauth' ], function () {
         Route::get('/{id}',             ['as' => 'clients.show',            'uses' => 'ClientController@show']);
         Route::delete('/{id}',          ['as' => 'clients.delete',          'uses' => 'ClientController@destroy']);
         Route::put('/{id}',             ['as' => 'clients.update',          'uses' => 'ClientController@update']);
+
     });
 
     Route::group(['prefix' => 'project'], function () {

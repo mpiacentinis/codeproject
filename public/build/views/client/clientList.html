@@ -7,6 +7,7 @@
                     <table class="table">
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Responsible</th>
                             <th>E-mail</th>
@@ -17,11 +18,13 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="list in clients.data">
+                            <td>{{ list.client_id }}</td>
                             <td>{{ list.name }}</td>
                             <td>{{ list.responsible }}</td>
                             <td>{{ list.email }}</td>
                             <td>{{ list.phone }}</td>
-                            <td><a ng-href="#/clients/{{list.client_id}}/edit">Editar</a></td>
+                            <td><a ng-href="#/clients/{{list.client_id}}/edit"><md-icon aria-label="Editar"  class="material-icons">edit</md-icon></a></td>
+                            <td><a ng-href="#/clients/{{list.client_id}}/remove"><md-icon aria-label="Excluir" class="material-icons">delete_sweep</md-icon></a></td>
                         </tr>
                         </tbody>
                     </table>

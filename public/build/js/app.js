@@ -36,7 +36,11 @@ app.config( [
 
         .when('/clients/:id/edit', {
             templateUrl: 'build/views/client/clientEdit.html',
-            controller: 'ClientEditController'});
+            controller: 'ClientEditController'})
+
+        .when('/clients/:id/remove', {
+            templateUrl: 'build/views/client/clientRemove.html',
+            controller: 'ClientRemoveController'});
 
 
         OAuthProvider.configure({

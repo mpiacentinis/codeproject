@@ -45,13 +45,24 @@ class ClientController extends Controller
                 'message' => 'Nao encontrado'
             ];
         } else {
-            if ( count($this->repository->with(['project'])->findWhere(['id' => $id])) > 0 ) {
+            /*
+
+            return $this->repository->with(['project'])->findWhere(['id' => $id]);
+
+            if ( count($this->repository->with(['project'])->findWhere(['client_id' => $id])) > 0 ) {
                 return [
                     'error' => true,
                     'message' => 'Este Cliente tem Projetos'
                 ];
             } else {
                 return $this->repository->delete( $id);
+            }*/
+
+            try {
+                return $this->repository->delete( $id);
+                return ['status' => true, 'message' => 'Projeto excluído com sucesso'];
+            } catch (\PDOException $e) {
+                return ['status' => false, 'message' => 'Não foi possível excluir o cliente'];
             }
         }
     }
